@@ -36,7 +36,9 @@ fn some_algorithm_in_zk<F: ScalarField>(
     range.range_check(ctx, x, 64);
 
     // RangeChip contains GateChip so you can still do basic operations:
-    let _sum = range.gate().add(ctx, x, x);
+    let sum = range.gate().mul(ctx, x, x);
+
+    range.range_check(ctx, sum, 128);
 }
 
 fn main() {
