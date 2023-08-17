@@ -40,9 +40,8 @@ fn some_algorithm_in_zk<F: ScalarField>(
 
 
     let z = range.gate().mul_add(ctx, y, Witness(F::from(32).neg()), x);
-    range.check_less_than(ctx, z, Witness(F::from(32)), lookup_bits);
-    range.check_less_than(ctx, Witness(F::zero()), z, lookup_bits);
-
+    range.range_check(ctx, z, 5);
+        
     println!("\nOut : {:?}\n", y.value());
     //z
 }
